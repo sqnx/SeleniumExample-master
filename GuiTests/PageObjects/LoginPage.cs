@@ -1,6 +1,5 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
-using Selenium.core;
 using Tests.SeleniumHelpers;
 
 namespace Tests.PageObjects

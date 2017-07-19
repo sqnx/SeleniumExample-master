@@ -1,9 +1,7 @@
 ﻿using log4net;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
-using Selenium.core;
 using Structura.GuiTests.PageObjects;
-using Tests.SeleniumHelpers;
 
 namespace Tests.PageObjects
 {
