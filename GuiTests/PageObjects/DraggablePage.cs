@@ -31,15 +31,15 @@ namespace Structura.GuiTests.PageObjects
 
         public Point getPostion()
         {
-            log.Info("Postion of element is: " + DraggablElement.Location);
+            log.Info("Postion of element is: X: " + DraggablElement.Location.X + "Y: " + DraggablElement.Location.Y);
             return DraggablElement.Location;
         }
 
         public void moveDraggableElement(int up, int right, int down, int left)
         {
             Actions actions = new Actions(_driver);
-            actions.DragAndDropToOffset(DraggablElement, DraggablElement.Location.X + right - left,
-                DraggablElement.Location.Y + up - down).Build().Perform();
+            actions.DragAndDropToOffset(DraggablElement, right,
+                down).Build().Perform();
         }
 
     }
