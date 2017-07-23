@@ -1,8 +1,9 @@
 ﻿using OpenQA.Selenium;
+using Selenium.core;
 
 namespace Structura.GuiTests.SeleniumHelpers
 {
-    public class SeleniumUtils
+    public class SeleniumUtils : TestBase
     {
         private readonly IWebDriver _driver;
         public SeleniumUtils(IWebDriver driver)
@@ -16,8 +17,9 @@ namespace Structura.GuiTests.SeleniumHelpers
                 _driver.FindElement(by);
                 return true;
             }
-            catch (NoSuchElementException)
+            catch (NoSuchElementException e)
             {
+                log.Error(e);
                 return false;
             }
         }

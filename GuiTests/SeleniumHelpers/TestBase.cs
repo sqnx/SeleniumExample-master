@@ -1,11 +1,11 @@
 ﻿using System;
-using System.Globalization;
-using System.Text;
-using System.Threading;
-using FluentAssertions;
+using System.Diagnostics;
+using System.Drawing.Imaging;
+using System.Reflection;
 using log4net;
 using NUnit.Framework;
 using OpenQA.Selenium;
+using OpenQA.Selenium.Support.Extensions;
 using Structura.GuiTests.SeleniumHelpers;
 using Structura.GuiTests.Utilities;
 
@@ -16,32 +16,59 @@ namespace Selenium.core
     {
         public IWebDriver _driver = new DriverFactory().Create();
         public string _baseUrl = ConfigurationHelper.Get<string>("TargetUrl");
-        public static readonly ILog log =
-    LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+        public static ILog log =
+    LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+        DateTime date = DateTime.Now;
+        Stopwatch _stopWatch = Stopwatch.StartNew();
 
 
-        [OneTimeSetUp]
+        [SetUp]
         public void OneTimeSetUp()
         {
-            log.Info("OPENING BROWSER: " + ConfigurationHelper.Get<String>("DriverToUse"));
-           // _driver = new DriverFactory().Create();
-            log.Info("OPENING URL: " + ConfigurationHelper.Get<String>("TargetUrl"));
+            log.Info("TEST: " + TestContext.CurrentContext.Test.FullName);
+            log.Info("BROWSER: " + ConfigurationHelper.Get<String>("DriverToUse"));
+            log.Info("URL: " + _baseUrl);
             _driver.Navigate().GoToUrl(_baseUrl);
+            
         }
 
-        [OneTimeTearDown]
+        [TearDown]
         public void OneTimeTearDown()
         {
             try
             {
-                _driver.Quit();
+                log.Info("************************** TEST FINISHED **************************");
+                log.Info("STATUS: " + TestContext.CurrentContext.Result.Outcome);
+                log.Info("TEST NAME: " + TestContext.CurrentContext.Test.Name);
+                log.Info("TEST CLASS: " + TestContext.CurrentContext.Test.ClassName);
+                log.Info("TEST TIME: " + _stopWatch.Elapsed);
+                log.Info("CLOSING BROWSER: " + ConfigurationHelper.Get<String>("DriverToUse"));
                 _driver.Close();
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                // Ignore errors if we are unable to close the browser
+                log.Error(e);
             }
-
         }
+
+        protected void UITest(Action action)
+        {
+            try
+            {
+                action();
+            }
+            catch (Exception ex)
+            {
+                log.Error(Environment.NewLine + "****************** FOUND EXCEPTION ******************" + Environment.NewLine + ex + Environment.NewLine);
+                var screenshot = _driver.TakeScreenshot();
+                screenshot.SaveAsFile(@"D:\TEMP\" 
+                                    + date.ToString("yyyy-MM-dd_HH.mm.ss") 
+                                    + "_"
+                                    + TestContext.CurrentContext.Test.FullName
+                                    + ".png", ImageFormat.Png);
+                throw;
+            }
+        }
+
     }
 }

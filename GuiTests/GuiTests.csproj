@@ -74,7 +74,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AltoroMutualTests.cs" />
     <Compile Include="Obects\UserObjects.cs" />
     <Compile Include="PageObjects\DraggablePage.cs" />
     <Compile Include="PageObjects\LoginPage.cs" />
@@ -106,6 +105,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <Content Include="NLog.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <None Include="NLog.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

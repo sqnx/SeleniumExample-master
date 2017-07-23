@@ -12,8 +12,12 @@ namespace Structura.GuiTests
         [Test]
         public void registerUser()
         {
+            UITest(() =>
+            {
             UserObjects user = new UserObjects("firstName", "lastName", "111222");
             new MainMenu(_driver).clickRegisterButton().registerUser(user);
+             });
+
         }
     }
 }

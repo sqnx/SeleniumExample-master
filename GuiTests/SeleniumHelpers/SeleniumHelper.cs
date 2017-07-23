@@ -26,7 +26,10 @@ namespace Structura.GuiTests.SeleniumHelpers
                     _driver = null;
                 }
             }
-            catch (Exception ex) { }
+            catch (Exception ex)
+            {
+                log.Error(ex);
+            }
         }
         public static IWebDriver Driver
         {
