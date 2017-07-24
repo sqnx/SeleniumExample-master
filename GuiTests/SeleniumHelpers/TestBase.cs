@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Diagnostics;
-using System.Drawing.Imaging;
 using System.Reflection;
 using log4net;
 using NUnit.Framework;
@@ -65,7 +64,7 @@ namespace Selenium.core
                                     + date.ToString("yyyy-MM-dd_HH.mm.ss") 
                                     + "_"
                                     + TestContext.CurrentContext.Test.FullName
-                                    + ".png", ImageFormat.Png);
+                                    + ".png", ScreenshotImageFormat.Png);
                 throw;
             }
         }

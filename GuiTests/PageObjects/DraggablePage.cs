@@ -17,9 +17,6 @@ namespace Structura.GuiTests.PageObjects
             _driver = driver;
             PageFactory.InitElements(_driver, this);
         }
-//
-//        [FindsBy(How = How.CssSelector, Using = "#name_3_firstname")]
-//        public IWebElement firstNameInput { get; set; }
 
         [FindsBy(How = How.CssSelector, Using = "#draggable")]
         public IWebElement DraggablElement { get; set; }

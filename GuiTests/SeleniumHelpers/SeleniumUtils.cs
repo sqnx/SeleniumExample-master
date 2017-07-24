@@ -5,7 +5,6 @@ namespace Structura.GuiTests.SeleniumHelpers
 {
     public class SeleniumUtils : TestBase
     {
-        private readonly IWebDriver _driver;
         public SeleniumUtils(IWebDriver driver)
         {
             _driver = driver;
